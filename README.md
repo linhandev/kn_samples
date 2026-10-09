@@ -35,7 +35,23 @@ python3 verify-publication.py --reference /path/to/reference \
 
 ## 消费者与运行验证
 
-华为 Maven 凭据通过 `HUAWEI_MAVEN_USER` / `HUAWEI_MAVEN_PASS` 或各消费者的 `local.properties` 配置，文件键为 `huaweiMavenUser` / `huaweiMavenPass`。不要将密码写进命令行或报告。
+`2.3.20-HUAWEI` 的 KGP、插件 marker 和 Native 发行包从 [Aliyun colab Maven](https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab/) 获取，旧华为 Maven 源已移除。凭据通过 `COLAB_MAVEN_USER` / `COLAB_MAVEN_PASS` 或各消费者的 `local.properties` 配置，文件键为 `colabMavenUser` / `colabMavenPass`。不要将密码写进命令行或报告。工具链仓库只匹配 HUAWEI 版本，CAPI 包仍限定来自本地 `m2`。
+
+macOS ARM64 Native 包的精确坐标路径为：
+
+```text
+org/jetbrains/kotlin/kotlin-native-prebuilt/2.3.20-HUAWEI/kotlin-native-prebuilt-2.3.20-HUAWEI-macos-aarch64.tar.gz
+```
+
+这个旧发行包的默认 NDK 下载地址已不可用。使用已有 OHOS LLVM 19 和 sysroot 时，在本地 Native 发行包副本的 `konan/konan.properties` 中配置以下路径（不提交机器配置）：
+
+```properties
+dependencies.macos_arm64-ohos_arm64 =
+targetToolchain.macos_arm64-ohos_arm64 = /path/to/ohos-llvm-19
+targetSysRoot.ohos_arm64 = /path/to/ohos-sysroot
+```
+
+本轮使用 OHOS LLVM 19.1.7 和 `sysroot-ohos-aarch64-6.0.2.640-04`，保留原发行包的编译器与 runtime。通过 `-Pkotlin.native.home=/path/to/huawei-native` 指向该副本，或运行组合脚本时设置 `CONSUMER_NATIVE_HOME`。
 
 ```bash
 # 同一业务代码分别经 BOM、leaf 解析；Debug 与 Release 都链接。

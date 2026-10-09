@@ -8,15 +8,17 @@ pluginManagement {
     val localProps = java.util.Properties().apply {
         runCatching { java.io.File("local.properties").inputStream() }.getOrNull()?.let { load(it) }
     }
-    val huaweiUser = System.getenv("HUAWEI_MAVEN_USER") ?: localProps.getProperty("huaweiMavenUser")
-    val huaweiPass = System.getenv("HUAWEI_MAVEN_PASS") ?: localProps.getProperty("huaweiMavenPass")
+    val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
+    val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
     repositories {
 
-        maven {
-            url = uri("https://devrepo.devcloud.cn-north-4.huaweicloud.com/artgalaxy/cn-north-4_a8338babc8534bb8aabb062c35845155_maven_7_1/")
-            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
-            if (huaweiUser != null && huaweiPass != null) {
-                credentials { username = huaweiUser; password = huaweiPass }
+        // Aliyun 保留了 HUAWEI 编译器；仅用于工具链，CAPI 仍从本地 m2 解析。
+        if (!colabUser.isNullOrBlank() && !colabPass.isNullOrBlank()) {
+            maven {
+                name = "colabToolchain"
+                url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
+                content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
+                credentials { username = colabUser; password = colabPass }
                 authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
             }
         }
@@ -37,8 +39,8 @@ dependencyResolutionManagement {
     val localProps = java.util.Properties().apply {
         runCatching { java.io.File("local.properties").inputStream() }.getOrNull()?.let { load(it) }
     }
-    val huaweiUser = System.getenv("HUAWEI_MAVEN_USER") ?: localProps.getProperty("huaweiMavenUser")
-    val huaweiPass = System.getenv("HUAWEI_MAVEN_PASS") ?: localProps.getProperty("huaweiMavenPass")
+    val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
+    val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
     repositories {
         exclusiveContent {
             forRepository { maven { url = uri(rootDir.parentFile.resolve("m2")) } }
@@ -46,11 +48,13 @@ dependencyResolutionManagement {
         }
 
 
-        maven {
-            url = uri("https://devrepo.devcloud.cn-north-4.huaweicloud.com/artgalaxy/cn-north-4_a8338babc8534bb8aabb062c35845155_maven_7_1/")
-            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
-            if (huaweiUser != null && huaweiPass != null) {
-                credentials { username = huaweiUser; password = huaweiPass }
+        // Aliyun 保留了 HUAWEI 编译器；仅用于工具链，CAPI 仍从本地 m2 解析。
+        if (!colabUser.isNullOrBlank() && !colabPass.isNullOrBlank()) {
+            maven {
+                name = "colabToolchain"
+                url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
+                content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
+                credentials { username = colabUser; password = colabPass }
                 authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
             }
         }

@@ -1,6 +1,7 @@
 package = platform.DriverDevelopmentKit.HidDdk
 headers = hid/hid_ddk_types.h hid/hid_ddk_api.h
 headerFilter = hid/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lhid.z -Wl,--pop-state
+linkerOpts = -lhid.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

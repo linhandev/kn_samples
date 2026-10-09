@@ -1,6 +1,7 @@
 package = platform.ArkGraphics2D.NativeDisplaySoloist
 headers = native_display_soloist/native_display_soloist.h
 headerFilter = native_display_soloist/native_display_soloist.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_display_soloist -Wl,--pop-state
+linkerOpts = -lnative_display_soloist
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

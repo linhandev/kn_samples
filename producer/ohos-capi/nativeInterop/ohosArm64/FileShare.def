@@ -2,6 +2,7 @@ package = platform.CoreFileKit.FileShare
 headers = filemanagement/fileshare/oh_file_share.h
 headerFilter = filemanagement/fileshare/oh_file_share.h
 depends = FileIO
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohfileshare -Wl,--pop-state
+linkerOpts = -lohfileshare
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

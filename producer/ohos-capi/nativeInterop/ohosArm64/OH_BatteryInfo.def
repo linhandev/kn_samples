@@ -1,6 +1,7 @@
 package = platform.BasicServicesKit.OH_BatteryInfo
 headers = BasicServicesKit/ohbattery_info.h
 headerFilter = BasicServicesKit/ohbattery_info.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohbattery_info -Wl,--pop-state
+linkerOpts = -lohbattery_info
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

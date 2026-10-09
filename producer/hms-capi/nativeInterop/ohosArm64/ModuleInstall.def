@@ -1,7 +1,8 @@
 package = platform.AppGalleryKit.ModuleInstall
 headers = AppGalleryKit/module_install.h
 headerFilter = AppGalleryKit/module_install.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lhmsmoduleinstall -Wl,--pop-state
+linkerOpts = -lhmsmoduleinstall
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

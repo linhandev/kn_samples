@@ -1,7 +1,8 @@
 package = platform.ServiceCollaborationKit.ServiceCollaboration
 headers = service_collaboration/service_collaboration_api.h
 headerFilter = service_collaboration/service_collaboration_api.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lservice_collaboration_ndk.z -Wl,--pop-state
+linkerOpts = -lservice_collaboration_ndk.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

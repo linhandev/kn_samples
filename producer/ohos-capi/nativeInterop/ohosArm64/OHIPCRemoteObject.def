@@ -2,6 +2,7 @@ package = platform.IPCKit.OHIPCRemoteObject
 headers = IPCKit/ipc_cremote_object.h
 headerFilter = IPCKit/ipc_cremote_object.h
 depends = OHIPCParcel
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lipc_capi -Wl,--pop-state
+linkerOpts = -lipc_capi
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

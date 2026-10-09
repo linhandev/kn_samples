@@ -2,6 +2,7 @@ package = platform.ArkUI.OH_DisplayManager
 headers = window_manager/oh_display_manager.h window_manager/oh_display_capture.h window_manager/oh_display_info.h
 headerFilter = window_manager/**
 depends = Image_NativeModule
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_display_manager -Wl,--pop-state
+linkerOpts = -lnative_display_manager
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

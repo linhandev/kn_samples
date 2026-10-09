@@ -1,6 +1,7 @@
 package = platform.BackgroundTasksKit.BackgroundProcessManager
 headers = background_process_manager/background_process_manager.h
 headerFilter = background_process_manager/background_process_manager.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lbackground_process_manager.z -Wl,--pop-state
+linkerOpts = -lbackground_process_manager.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

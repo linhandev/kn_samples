@@ -1,3 +1,5 @@
+> 历史说明：本文记录旧聚合发布/链接方案。当前 22-0.5 的独立 leaf、内联异常 shim 和验证步骤见[根目录说明](../README.md)，下文旧版本号和命令不作为当前操作入口。
+
 # KMP CAPI 自动化验证示例
 
 本项目是一个 Kotlin Multiplatform (KMP) + HarmonyOS 示例工程，聚焦通过 Kotlin/Native 与 HarmonyOS C-API 进行互操作，并提供“其他语法模块”的自动化验证能力（常量/宏/函数清单统计 → 报告）。

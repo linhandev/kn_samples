@@ -1,7 +1,8 @@
 package = platform.ArkRuntime.JSVM
 headers = ark_runtime/jsvm.h ark_runtime/jsvm_types.h
 headerFilter = ark_runtime/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ljsvm -Wl,--pop-state
+linkerOpts = -ljsvm
 language = C++
 compilerOpts = -std=c++17
 depends = posix
+enableUndefinedApiProtection = true

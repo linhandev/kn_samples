@@ -1,6 +1,7 @@
 package = platform.IPCKit.OHIPCErrorCode
 headers = IPCKit/ipc_error_code.h
 headerFilter = IPCKit/ipc_error_code.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lipc_capi -Wl,--pop-state
+linkerOpts = -lipc_capi
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -1,6 +1,7 @@
 package = platform.DriverDevelopmentKit.UsbDDK
 headers = usb/usb_ddk_api.h usb/usb_ddk_types.h usb/ddk_types.h
 headerFilter = usb/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lddk_base.z -lusb_ndk.z -Wl,--pop-state
+linkerOpts = -lddk_base.z -lusb_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

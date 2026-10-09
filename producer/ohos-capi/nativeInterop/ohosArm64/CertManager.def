@@ -2,6 +2,7 @@ package = platform.DeviceCertificateKit.CertManager
 headers = device_certificate/certmanager/cm_native_api.h
 headerFilter = device_certificate/certmanager/cm_native_api.h
 depends = CertManagerType
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohcert_manager.z -Wl,--pop-state
+linkerOpts = -lohcert_manager.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

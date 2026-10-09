@@ -1,6 +1,7 @@
 package = platform.DRMKit.Drm
 headers = multimedia/drm_framework/native_drm_err.h multimedia/drm_framework/native_mediakeysession.h multimedia/drm_framework/native_mediakeysystem.h multimedia/drm_framework/native_drm_common.h
 headerFilter = multimedia/drm_framework/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_drm -Wl,--pop-state
+linkerOpts = -lnative_drm
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -1,6 +1,7 @@
 package = platform.DriverDevelopmentKit.BaseDdk
 headers = ddk/ddk_types.h ddk/ddk_api.h
 headerFilter = ddk/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lddk_base.z -Wl,--pop-state
+linkerOpts = -lddk_base.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

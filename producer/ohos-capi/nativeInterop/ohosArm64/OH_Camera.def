@@ -2,6 +2,7 @@ package = platform.CameraKit.OH_Camera
 headers = ohcamera/camera_input.h ohcamera/camera_manager.h ohcamera/photo_output.h ohcamera/camera.h ohcamera/metadata_output.h ohcamera/photo_native.h ohcamera/capture_session.h ohcamera/preview_output.h ohcamera/camera_device.h ohcamera/video_output.h
 headerFilter = ohcamera/**
 depends = Image_NativeModule MediaAssetManager OH_NativeBuffer
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohcamera -Wl,--pop-state
+linkerOpts = -lohcamera
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

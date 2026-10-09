@@ -1,6 +1,7 @@
 package = platform.IPCKit.OHIPCParcel
 headers = IPCKit/ipc_cparcel.h
 headerFilter = IPCKit/ipc_cparcel.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lipc_capi -Wl,--pop-state
+linkerOpts = -lipc_capi
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

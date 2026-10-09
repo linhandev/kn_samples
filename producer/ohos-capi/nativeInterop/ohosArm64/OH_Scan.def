@@ -1,6 +1,7 @@
 package = platform.BasicServicesKit.OH_Scan
 headers = BasicServicesKit/ohscan.h
 headerFilter = BasicServicesKit/ohscan.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohscan -Wl,--pop-state
+linkerOpts = -lohscan
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

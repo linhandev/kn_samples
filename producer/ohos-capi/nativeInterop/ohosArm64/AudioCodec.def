@@ -2,6 +2,7 @@ package = platform.AVCodecKit.AudioCodec
 headers = multimedia/player_framework/native_avcodec_audiocodec.h
 headerFilter = multimedia/player_framework/native_avcodec_audiocodec.h
 depends = CodecBase
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_media_acodec -Wl,--pop-state
+linkerOpts = -lnative_media_acodec
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

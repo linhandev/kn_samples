@@ -1,6 +1,7 @@
 package = platform.DriverDevelopmentKit.SCSIPeripheralDDK
 headers = scsi_peripheral/scsi_peripheral_types.h scsi_peripheral/scsi_peripheral_api.h
 headerFilter = scsi_peripheral/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lscsi.z -Wl,--pop-state
+linkerOpts = -lscsi.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

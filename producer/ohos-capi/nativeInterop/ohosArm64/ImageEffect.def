@@ -2,6 +2,7 @@ package = platform.ImageKit.ImageEffect
 headers = multimedia/image_effect/image_effect.h multimedia/image_effect/image_effect_filter.h multimedia/image_effect/image_effect_errors.h
 headerFilter = multimedia/image_effect/**
 depends = Image_NativeModule NativeWindow OH_NativeBuffer
-linkerOpts = -Wl,--push-state -Wl,--as-needed -limage_effect -Wl,--pop-state
+linkerOpts = -limage_effect
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -2,6 +2,7 @@ package = platform.ArkData.UDMF
 headers = database/udmf/udmf_err_code.h database/udmf/udmf.h database/udmf/uds.h database/udmf/utd.h database/udmf/udmf_meta.h
 headerFilter = database/udmf/**
 depends = Image_NativeModule
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ludmf -Wl,--pop-state
+linkerOpts = -ludmf
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

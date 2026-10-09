@@ -1,0 +1,6 @@
+package = capi.alignment.probe
+headers = probe.h
+headerFilter = probe.h
+language = C++
+compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

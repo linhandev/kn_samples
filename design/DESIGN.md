@@ -1,3 +1,5 @@
+> 历史说明：本文记录旧聚合发布/链接方案。当前 22-0.5 的独立 leaf、内联异常 shim 和验证步骤见[根目录说明](../README.md)，下文旧版本号和命令不作为当前操作入口。
+
 # kn_sample 设计文档
 
 > 用 cpf 0.4（Kotlin `2.2.21-0.4.0-03`）把 HarmonyOS 独有的 **159 个 ohos-only cinterop def** + 4 个 dist-only def（posix/linux/gles3/glesCommon）封装成一个 Maven klib，

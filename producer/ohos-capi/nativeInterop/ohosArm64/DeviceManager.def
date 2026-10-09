@@ -1,6 +1,7 @@
 package = platform.DistributedServiceKit.DeviceManager
 headers = distributedhardware/device_manager/oh_device_manager_err_code.h distributedhardware/device_manager/oh_device_manager.h
 headerFilter = distributedhardware/device_manager/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ldevicemanager_ndk -Wl,--pop-state
+linkerOpts = -ldevicemanager_ndk
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -1,7 +1,8 @@
 package = platform.DeviceSecurityKit.DeviceSecurityMode
 headers = DeviceSecurityKit/device_security_mode.h
 headerFilter = DeviceSecurityKit/device_security_mode.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ldevice_security_mode.z -Wl,--pop-state
+linkerOpts = -ldevice_security_mode.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

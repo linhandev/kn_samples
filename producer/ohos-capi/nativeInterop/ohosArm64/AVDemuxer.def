@@ -2,6 +2,7 @@ package = platform.AVCodecKit.AVDemuxer
 headers = multimedia/player_framework/native_avdemuxer.h
 headerFilter = multimedia/player_framework/native_avdemuxer.h
 depends = AVSource CodecBase
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_media_avdemuxer -Wl,--pop-state
+linkerOpts = -lnative_media_avdemuxer
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

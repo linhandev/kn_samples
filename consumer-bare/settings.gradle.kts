@@ -14,6 +14,7 @@ pluginManagement {
         knActionMavenUrl?.let { maven(it) }
         maven {
             url = huaweiMavenUrl
+            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
             isAllowInsecureProtocol = false
             if (huaweiUser != null && huaweiPass != null) {
                 credentials { username = huaweiUser; password = huaweiPass }
@@ -42,16 +43,21 @@ dependencyResolutionManagement {
     val huaweiUser = System.getenv("HUAWEI_MAVEN_USER") ?: localProps.getProperty("huaweiMavenUser")
     val huaweiPass = System.getenv("HUAWEI_MAVEN_PASS") ?: localProps.getProperty("huaweiMavenPass")
     repositories {
+        exclusiveContent {
+            forRepository { maven { url = uri(rootDir.parentFile.resolve("m2")) } }
+            filter { includeGroup("org.cpf.kotlin") }
+        }
+
         knActionMavenUrl?.let { maven(it) }
         maven {
             url = huaweiMavenUrl
+            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
             isAllowInsecureProtocol = false
             if (huaweiUser != null && huaweiPass != null) {
                 credentials { username = huaweiUser; password = huaweiPass }
                 authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
             }
         }
-        maven { url = uri(rootDir.parentFile.resolve("m2")) }
         maven("https://maven.eazytec-cloud.com/nexus/repository/maven-public")
         maven("https://mirrors.tencent.com/nexus/repository/maven-tencent")
         maven("https://mirrors.tencent.com/nexus/repository/maven-public/")

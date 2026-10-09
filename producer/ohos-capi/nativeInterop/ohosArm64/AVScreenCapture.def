@@ -2,6 +2,7 @@ package = platform.MediaKit.AVScreenCapture
 headers = multimedia/player_framework/native_avscreen_capture_base.h multimedia/player_framework/native_avscreen_capture_errors.h multimedia/player_framework/native_avscreen_capture.h
 headerFilter = multimedia/player_framework/**
 depends = Core NativeWindow
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_avscreen_capture -Wl,--pop-state
+linkerOpts = -lnative_avscreen_capture
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -2,7 +2,8 @@ package = platform.PreviewKit.Preview
 headers = PreviewKit/preview_kit.h \
     PreviewKit/open_file_boost.h
 headerFilter = PreviewKit/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lopen_file_boost -Wl,--pop-state
+linkerOpts = -lopen_file_boost
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

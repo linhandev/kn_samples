@@ -1,6 +1,7 @@
 package = platform.AVSessionKit.OHAVSession
 headers = multimedia/av_session/native_avsession.h multimedia/av_session/native_avmetadata.h multimedia/av_session/native_avsession_errors.h
 headerFilter = multimedia/av_session/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohavsession -Wl,--pop-state
+linkerOpts = -lohavsession
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

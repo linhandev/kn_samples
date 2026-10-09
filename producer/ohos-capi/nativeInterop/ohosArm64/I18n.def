@@ -1,6 +1,7 @@
 package = platform.LocalizationKit.I18n
 headers = i18n/errorcode.h i18n/timezone.h
 headerFilter = i18n/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohi18n -Wl,--pop-state
+linkerOpts = -lohi18n
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

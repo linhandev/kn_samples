@@ -3,7 +3,8 @@ headers = NetworkBoostKit/network_boost_handover.h \
     NetworkBoostKit/network_boost_quality.h \
     NetworkBoostKit/network_boost.h
 headerFilter = NetworkBoostKit/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnetwork_boost -Wl,--pop-state
+linkerOpts = -lnetwork_boost
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

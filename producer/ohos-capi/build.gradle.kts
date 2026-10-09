@@ -1,41 +1,38 @@
-import java.util.Properties
+import org.cpf.kotlin.capi.CapiKlibPublishing
+import org.cpf.kotlin.capi.CapiKlibPublishingPlugin
+
+apply<CapiKlibPublishingPlugin>()
 
 plugins {
     kotlin("multiplatform")
     `maven-publish`
 }
 
-// NOTE: groupId `com.example` is a placeholder — pending decision (see design/DESIGN.md §6).
 group = "org.cpf.kotlin"
 
 base.archivesName.set("ohos-capi")
 
-// Auto-register one cinterop per .def in nativeInterop/ohosArm64/.
-// Each def's `depends = A B C` line is parsed: for each depended name, pass cinterop
-//   -library <unpacked depended klib path>  (cinterop only resolves depends via -library,
-//   not -libraryPath which is just a search path)
-// and set -Xshort-module-name so the produced klib is findable by that name.
-// Task ordering: cinterop<Name>OhosArm64 dependsOn cinterop<Dep>OhosArm64 for each dep.
-// NOTE: defs have enableUndefinedApiProtection stripped (see memory kn-cinterop-stub-runtime-abi-incompat).
-
 val defDir = file("$projectDir/nativeInterop/ohosArm64")
 val cinteropOutDir = layout.buildDirectory.dir("classes/kotlin/ohosArm64/main/cinterop")
-
-// Parse each def: name -> depends (by short_name as written in the def).
-data class DefInfo(val name: String, val depends: List<String>)
-val defs: List<DefInfo> = defDir.listFiles { f -> f.extension == "def" }!!
-    .map { f ->
-        val name = f.nameWithoutExtension
-        val deps = f.readLines()
-            .firstOrNull { it.startsWith("depends") }
-            ?.substringAfter("=")?.trim()?.split(Regex("\\s+"))?.filter { it.isNotBlank() }
-            ?: emptyList()
-        DefInfo(name, deps)
+val generatedDefs = layout.buildDirectory.dir("generated/defs")
+val prepareDefs = tasks.register("prepareCapiDefs") {
+    inputs.dir(defDir)
+    outputs.dir(generatedDefs)
+    doLast {
+        defDir.listFiles { f -> f.extension == "def" }!!.forEach { src ->
+            CapiKlibPublishing.materializeDefWithThrowShim(src, generatedDefs.get().file(src.name).asFile)
+        }
     }
+}
+
+
+val ohosDefs = CapiKlibPublishing.parseDefs(defDir)
+val ohosNames = ohosDefs.map { it.name }.toSet()
+
+data class DefInfo(val name: String, val depends: List<String>)
+val defs: List<DefInfo> = ohosDefs.map { DefInfo(it.name, it.depends) }
 val defByName = defs.associateBy { it.name }
 
-// Transitive closure of depends, restricted to defs in our set (external depends like posix/
-// linux/gles3 are dist builtins resolved from the default search path, not -library).
 fun transitiveClosure(name: String): List<String> {
     val seen = linkedSetOf<String>()
     fun visit(n: String) {
@@ -53,18 +50,10 @@ kotlin {
             val main by getting {
                 cinterops {
                     defs.forEach { d ->
-                        // cinterop name: use def name as-is (KMP accepts these identifiers).
                         create(d.name) {
-                            defFile("$defDir/${d.name}.def")
+                            defFile(generatedDefs.get().file("${d.name}.def").asFile)
                             extraOpts("-Xshort-module-name", d.name)
-                            // EXPERIMENT (bare-regression rootcause): disable dist auto-load so
-                            // depends resolves to our -library klibs (com.example:...) not dist
-                            // (org.jetbrains.kotlin.native.platform.*). Mirrors cpf's
-                            // GeneratePlatformLibraries -no-default-libs.
                             extraOpts("-no-default-libs")
-                            // Load the full transitive closure of depends as -library (cinterop's
-                            // -library only loads direct deps; a depended klib's own transitive
-                            // depends aren't auto-resolved from -libraryPath, so pass them all).
                             transitiveClosure(d.name).forEach { dep ->
                                 val depDir = cinteropOutDir.map { it.file("ohos-capi-cinterop-${dep}").asFile.absolutePath }.get()
                                 extraOpts("-library", depDir)
@@ -74,12 +63,12 @@ kotlin {
                 }
             }
         }
+        compilerOptions.freeCompilerArgs.addAll(
+            "-Xklib-duplicated-unique-name-strategy=allow-all-with-warning"
+        )
     }
 }
 
-// Task ordering: each cinterop depends on its depended cinterops' tasks (only for deps in our
-// set; external deps like posix are dist builtins with no task). KMP task name capitalizes the
-// cinterop name's first letter: cinterop<Name>OhosArm64.
 fun cinteropTaskName(name: String) = "cinterop${name.replaceFirstChar { it.uppercase() }}OhosArm64"
 defs.forEach { d ->
     transitiveClosure(d.name).forEach { dep ->
@@ -87,40 +76,31 @@ defs.forEach { d ->
     }
 }
 
-publishing {
-    publications {
-        // KMP metadata + target publications share artifactId ohos-capi (consumer depends on
-        // com.example:ohos-capi). The .pom overwrite warning is benign: .module carries per-target
-        // variants consumers resolve on. Splitting artifactIds breaks .module variant resolution.
-        withType<MavenPublication> {
-            artifactId = "ohos-capi"
-        }
-    }
-    // Publish to the repo-local Maven repo (kn_sample/m2, gitignored) instead of ~/.m2, so the
-    // published klibs are inspectable alongside the source. Use `./gradlew :ohos-capi:publish`.
-    // 同时发布到 colab 远程仓库(凭据在 local.properties 的 colabMavenUser/Pass),供消费者拉取。
-    repositories {
-        maven { url = uri(rootProject.projectDir.parentFile.resolve("m2")) }
-        val localProps = Properties().apply {
-            runCatching { rootProject.file("local.properties").inputStream() }.getOrNull()?.let { load(it) }
-        }
-        val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
-        val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
-        if (!colabUser.isNullOrEmpty() && !colabPass.isNullOrEmpty()) {
-            maven {
-                name = "colab"
-                url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
-                credentials { username = colabUser; password = colabPass }
-                authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
-            }
-        }
+defs.forEach { d ->
+    tasks.named(cinteropTaskName(d.name)).configure {
+        dependsOn(prepareDefs)
+        val moduleNameField = this.javaClass.superclass.getDeclaredField("moduleName")
+        moduleNameField.isAccessible = true
+        moduleNameField.set(this, "org.jetbrains.kotlin.native.platform.${d.name}")
     }
 }
 
-// colab 远程仓库不允许同路径覆盖(409),而 KMP 的 kotlinMultiplatform metadata publication 与
-// ohosArm64 target publication 共用 artifactId,两者都 PUT <artifact>-<version>.pom/.module 会
-// 冲突。本地 m2 允许覆盖(benign,见 DESIGN.md #17),colab 不允许。只发 target publication 到
-// colab(含 .klib + .module + .pom,consumer 按 .module 的 ohosArm64 variant 解析),跳过 metadata。
-tasks.matching {
-    it.name == "publishKotlinMultiplatformPublicationToColabRepository"
-}.configureEach { enabled = false }
+val klibVersion = property("klibVersion") as String
+// ohos defs only depend on ohos defs; hms names checked in :hms-capi.
+extensions.getByType(CapiKlibPublishing::class.java).configure(
+    project = project,
+    defs = ohosDefs,
+    bomArtifactId = "ohos-capi",
+    knownDefNames = ohosNames,
+    archivesName = "ohos-capi",
+    klibVersion = klibVersion,
+)
+
+// 仅供缺失 API 回归测试使用，不注册 Maven publication。
+tasks.register("prepareProtectionProbe") {
+    val source = rootProject.file("../tests/protection/probe.def")
+    val destination = layout.buildDirectory.file("protection/probe.def")
+    inputs.file(source)
+    outputs.file(destination)
+    doLast { CapiKlibPublishing.materializeDefWithThrowShim(source, destination.get().asFile) }
+}

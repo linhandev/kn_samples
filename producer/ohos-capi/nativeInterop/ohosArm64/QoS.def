@@ -1,6 +1,7 @@
 package = platform.KernelEnhanceKit.QoS
 headers = qos/qos.h
 headerFilter = qos/qos.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lqos -Wl,--pop-state
+linkerOpts = -lqos
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

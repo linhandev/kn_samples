@@ -1,7 +1,8 @@
 package = platform.PenKit.GlobalColorPicker
 headers = color_picker/native_gcp_api.h
 headerFilter = color_picker/native_gcp_api.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lcolorpicker_ndk.z -Wl,--pop-state
+linkerOpts = -lcolorpicker_ndk.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

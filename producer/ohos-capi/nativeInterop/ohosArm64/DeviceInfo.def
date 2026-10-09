@@ -1,6 +1,7 @@
 package = platform.BasicServicesKit.DeviceInfo
 headers = deviceinfo.h
 headerFilter = deviceinfo.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ldeviceinfo_ndk.z -Wl,--pop-state
+linkerOpts = -ldeviceinfo_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

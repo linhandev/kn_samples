@@ -1,7 +1,8 @@
 package = platform.CoreFileKit.CloudDisk
 headers = filemanagement/clouddiskmanager/oh_cloud_disk_manager.h filemanagement/clouddiskmanager/cloud_disk_error_code.h
 headerFilter = filemanagement/clouddiskmanager/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohclouddiskmanager -Wl,--pop-state
+linkerOpts = -lohclouddiskmanager
 language = C++
 compilerOpts = -std=c++17
 depends = posix
+enableUndefinedApiProtection = true

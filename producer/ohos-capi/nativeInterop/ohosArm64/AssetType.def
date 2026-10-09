@@ -1,6 +1,7 @@
 package = platform.AssetStoreKit.AssetType
 headers = asset/asset_type.h
 headerFilter = asset/asset_type.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lasset_ndk.z -Wl,--pop-state
+linkerOpts = -lasset_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

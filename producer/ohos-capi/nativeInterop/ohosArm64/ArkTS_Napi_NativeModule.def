@@ -1,6 +1,7 @@
 package = platform.ArkTS.ArkTS_Napi_NativeModule
 headers = napi/common.h napi/native_api.h node_api.h node_api_types.h js_native_api.h js_native_api_types.h
 headerFilter = napi/** node_api.h node_api_types.h js_native_api.h js_native_api_types.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lace_napi.z -Wl,--pop-state
+linkerOpts = -lace_napi.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

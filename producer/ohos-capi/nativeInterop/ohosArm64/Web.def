@@ -1,6 +1,7 @@
 package = platform.ArkWeb.Web
 headers = web/arkweb_scheme_handler.h web/arkweb_interface.h web/arkweb_type.h web/arkweb_net_error_list.h web/arkweb_error_code.h web/native_interface_arkweb.h
 headerFilter = web/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohweb -Wl,--pop-state
+linkerOpts = -lohweb
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

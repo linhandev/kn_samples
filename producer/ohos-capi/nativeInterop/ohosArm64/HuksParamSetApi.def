@@ -2,6 +2,7 @@ package = platform.UniversalKeystoreKit.HuksParamSetApi
 headers = huks/native_huks_param.h
 headerFilter = huks/native_huks_param.h
 depends = HuksTypeApi
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lhuks_ndk.z -Wl,--pop-state
+linkerOpts = -lhuks_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

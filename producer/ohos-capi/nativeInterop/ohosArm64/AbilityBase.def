@@ -1,6 +1,7 @@
 package = platform.AbilityKit.AbilityBase
 headers =  AbilityKit/ability_base/ability_base_common.h AbilityKit/ability_base/want.h
 headerFilter = AbilityKit/ability_base/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lability_base_want -Wl,--pop-state
+linkerOpts = -lability_base_want
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

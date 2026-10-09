@@ -1,7 +1,8 @@
 package = platform.RemoteCommunicationKit.RemoteCommunication
 headers = RemoteCommunicationKit/rcp.h
 headerFilter = RemoteCommunicationKit/rcp.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lrcp_c -Wl,--pop-state
+linkerOpts = -lrcp_c
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

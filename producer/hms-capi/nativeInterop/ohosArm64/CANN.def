@@ -6,7 +6,8 @@ headers = CANNKit/hiai_tensor.h \
     CANNKit/hiai_single_op.h \
     CANNKit/hiai_aipp_param.h
 headerFilter = CANNKit/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lhiai_foundation -Wl,--pop-state
+linkerOpts = -lhiai_foundation
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

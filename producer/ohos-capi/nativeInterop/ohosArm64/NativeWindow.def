@@ -2,6 +2,7 @@ package = platform.ArkGraphics2D.NativeWindow
 headers = native_image/graphic_error_code.h native_vsync/graphic_error_code.h native_buffer/graphic_error_code.h native_window/buffer_handle.h native_window/external_window.h native_window/graphic_error_code.h
 headerFilter = native_buffer/graphic_error_code.h native_image/graphic_error_code.h native_vsync/graphic_error_code.h native_window/**
 depends = BufferCommon
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_window -Wl,--pop-state
+linkerOpts = -lnative_window
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

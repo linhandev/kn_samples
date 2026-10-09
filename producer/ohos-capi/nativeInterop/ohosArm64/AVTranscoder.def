@@ -2,6 +2,7 @@ package = platform.MediaKit.AVTranscoder
 headers = multimedia/player_framework/avtranscoder_base.h multimedia/player_framework/avtranscoder.h
 headerFilter = multimedia/player_framework/**
 depends = CodecBase Core
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lavtranscoder -Wl,--pop-state
+linkerOpts = -lavtranscoder
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

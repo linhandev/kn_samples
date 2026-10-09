@@ -1,6 +1,7 @@
 package = platform.ArkData.RDB
 headers = database/rdb/oh_values_bucket.h database/rdb/relational_store_error_code.h database/rdb/oh_cursor.h database/rdb/oh_value_object.h database/rdb/relational_store.h database/rdb/oh_rdb_types.h database/rdb/oh_predicates.h database/rdb/oh_rdb_transaction.h database/rdb/oh_rdb_crypto_param.h database/data/oh_data_value.h database/data/oh_data_values.h database/data/oh_data_values_buckets.h database/data/data_asset.h
 headerFilter = database/data/** database/rdb/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_rdb_ndk.z -Wl,--pop-state
+linkerOpts = -lnative_rdb_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

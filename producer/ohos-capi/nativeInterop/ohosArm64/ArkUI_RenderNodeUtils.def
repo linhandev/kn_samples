@@ -2,6 +2,7 @@ package = platform.ArkUI.ArkUI_RenderNodeUtils
 headers = arkui/native_render.h
 headerFilter = arkui/native_render.h
 depends = ArkUI_NativeModule
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lace_ndk.z -Wl,--pop-state
+linkerOpts = -lace_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

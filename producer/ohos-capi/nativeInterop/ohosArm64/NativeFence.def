@@ -1,6 +1,7 @@
 package = platform.ArkGraphics2D.NativeFence
 headers = native_fence/native_fence.h
 headerFilter = native_fence/native_fence.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_fence -Wl,--pop-state
+linkerOpts = -lnative_fence
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

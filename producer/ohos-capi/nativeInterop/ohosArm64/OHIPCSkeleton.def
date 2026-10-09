@@ -2,6 +2,7 @@ package = platform.IPCKit.OHIPCSkeleton
 headers = IPCKit/ipc_cskeleton.h
 headerFilter = IPCKit/ipc_cskeleton.h
 depends = OHIPCParcel
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lipc_capi -Wl,--pop-state
+linkerOpts = -lipc_capi
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

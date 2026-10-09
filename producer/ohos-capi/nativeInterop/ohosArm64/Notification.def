@@ -1,6 +1,7 @@
 package = platform.NotificationKit.NOTIFICATION
 headers = NotificationKit/notification.h
 headerFilter = NotificationKit/notification.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohnotification -Wl,--pop-state
+linkerOpts = -lohnotification
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

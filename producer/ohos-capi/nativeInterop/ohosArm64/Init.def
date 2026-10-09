@@ -1,6 +1,7 @@
 package = platform.BasicServicesKit.Init
 headers = syscap_ndk.h
 headerFilter = syscap_ndk.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -ldeviceinfo_ndk.z -Wl,--pop-state
+linkerOpts = -ldeviceinfo_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

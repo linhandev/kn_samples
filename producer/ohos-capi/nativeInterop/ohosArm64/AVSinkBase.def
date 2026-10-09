@@ -2,6 +2,7 @@ package = platform.MediaKit.AVSinkBase
 headers = multimedia/player_framework/lowpower_avsink_base.h
 headerFilter = multimedia/player_framework/lowpower_avsink_base.h
 depends = Core
-linkerOpts = -Wl,--push-state -Wl,--as-needed -llowpower_avsink -Wl,--pop-state
+linkerOpts = -llowpower_avsink
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

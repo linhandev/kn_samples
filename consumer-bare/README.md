@@ -1,3 +1,5 @@
+> 历史说明：本文记录旧聚合发布/链接方案。当前 22-0.5 的独立 leaf、内联异常 shim 和验证步骤见[根目录说明](../README.md)，下文旧版本号和命令不作为当前操作入口。
+
 # Kotlin/Native Exception Demo (Minimal)
 
 Keep `bare` branch a starting point for doing a demo, impl demos on another branch.

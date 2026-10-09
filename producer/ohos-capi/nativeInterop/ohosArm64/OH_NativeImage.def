@@ -1,7 +1,8 @@
 package = platform.ArkGraphics2D.OH_NativeImage
 headers = native_image/native_image.h
 headerFilter = native_image/native_image.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_image -Wl,--pop-state
+linkerOpts = -lnative_image
 depends = BufferCommon
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

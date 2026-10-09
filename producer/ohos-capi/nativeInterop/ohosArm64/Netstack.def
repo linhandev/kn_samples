@@ -1,6 +1,7 @@
 package = platform.NetworkKit.Netstack
 headers = cstddef cstdint network/netstack/net_http_type.h network/netstack/net_http.h network/netstack/net_websocket_type.h network/netstack/net_websocket.h network/netstack/net_ssl/net_ssl_c_type.h network/netstack/net_ssl/net_ssl_c.h
 headerFilter = network/netstack/** network/netstack/net_ssl/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnet_http -lnet_ssl -lnet_websocket -Wl,--pop-state
+linkerOpts = -lnet_http -lnet_ssl -lnet_websocket
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

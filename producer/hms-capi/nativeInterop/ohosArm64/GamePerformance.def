@@ -1,7 +1,8 @@
 package = platform.GameServiceKit.GamePerformance
 headers = GameServiceKit/game_performance.h
 headerFilter = GameServiceKit/game_performance.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lgame_performance.z -Wl,--pop-state
+linkerOpts = -lgame_performance.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

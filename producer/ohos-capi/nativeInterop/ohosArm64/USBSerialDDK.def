@@ -1,6 +1,7 @@
 package = platform.DriverDevelopmentKit.USBSerialDDK
 headers = usb_serial/usb_serial_api.h usb_serial/usb_serial_types.h
 headerFilter = usb_serial/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lusb_serial_ndk.z -Wl,--pop-state
+linkerOpts = -lusb_serial_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

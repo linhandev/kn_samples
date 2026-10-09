@@ -1,7 +1,8 @@
 package = platform.FunctionFlowRuntimeKit.FFRT
 headers = ffrt/condition_variable.h ffrt/sleep.h ffrt/task.h ffrt/shared_mutex.h ffrt/timer.h ffrt/type_def.h ffrt/loop.h ffrt/mutex.h ffrt/queue.h ffrt/fiber.h
 headerFilter = ffrt/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lffrt.z -Wl,--pop-state
+linkerOpts = -lffrt.z
 language = C++
 compilerOpts = -std=c++17
 depends = posix
+enableUndefinedApiProtection = true

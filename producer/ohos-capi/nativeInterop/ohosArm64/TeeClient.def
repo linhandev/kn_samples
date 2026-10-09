@@ -1,7 +1,8 @@
 package = platform.TEEKit.TeeClient
 headers = TEEKit/tee_client/tee_client_constants.h TEEKit/tee_client/tee_client_type.h TEEKit/tee_client/tee_client_api.h
 headerFilter = TEEKit/tee_client/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lteec -Wl,--pop-state
+linkerOpts = -lteec
 language = C++
 compilerOpts = -std=c++17
 depends = posix
+enableUndefinedApiProtection = true

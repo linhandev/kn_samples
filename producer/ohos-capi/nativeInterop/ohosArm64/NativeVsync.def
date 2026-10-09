@@ -1,6 +1,7 @@
 package = platform.ArkGraphics2D.NativeVsync
 headers = native_vsync/native_vsync.h
 headerFilter = native_vsync/native_vsync.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_vsync -Wl,--pop-state
+linkerOpts = -lnative_vsync
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

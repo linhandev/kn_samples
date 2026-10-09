@@ -2,6 +2,7 @@ package = platform.MediaKit.AVRecorder
 headers = multimedia/player_framework/avrecorder.h multimedia/player_framework/avrecorder_base.h
 headerFilter = multimedia/player_framework/**
 depends = Core MediaAssetManager NativeWindow
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lavrecorder -Wl,--pop-state
+linkerOpts = -lavrecorder
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

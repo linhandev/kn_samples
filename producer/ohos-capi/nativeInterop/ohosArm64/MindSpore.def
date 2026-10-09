@@ -1,6 +1,7 @@
 package = platform.MindSporeLiteKit.MindSpore
 headers = mindspore/status.h mindspore/types.h mindspore/context.h mindspore/data_type.h mindspore/model.h mindspore/format.h mindspore/tensor.h
 headerFilter = mindspore/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lmindspore_lite_ndk -Wl,--pop-state
+linkerOpts = -lmindspore_lite_ndk
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

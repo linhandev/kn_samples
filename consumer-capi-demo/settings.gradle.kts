@@ -10,23 +10,11 @@ pluginManagement {
     }
     val huaweiUser = System.getenv("HUAWEI_MAVEN_USER") ?: localProps.getProperty("huaweiMavenUser")
     val huaweiPass = System.getenv("HUAWEI_MAVEN_PASS") ?: localProps.getProperty("huaweiMavenPass")
-    val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
-    val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
     repositories {
-        // colab: 发布 org.cpf.kotlin klib 的仓库(凭据在 local.properties)
-        maven {
-            url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
-            if (colabUser != null && colabPass != null) {
-                credentials { username = colabUser; password = colabPass }
-                authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
-            }
-        }
-        // 本地 m2:测试期走本地 m2(producer 发布的待测版本);发布期改回 colab 远程仓。
-        // 开发流程:有变更测试时先走本地 m2,发布完新版本后再走 colab(见根 agent.md)。
-        // 当前 22-0.2 已发 colab,走 colab 远程仓验证(本地 m2 注释)。
-        // maven { url = uri(rootDir.parentFile.resolve("m2")) }
+
         maven {
             url = uri("https://devrepo.devcloud.cn-north-4.huaweicloud.com/artgalaxy/cn-north-4_a8338babc8534bb8aabb062c35845155_maven_7_1/")
+            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
             if (huaweiUser != null && huaweiPass != null) {
                 credentials { username = huaweiUser; password = huaweiPass }
                 authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
@@ -51,23 +39,16 @@ dependencyResolutionManagement {
     }
     val huaweiUser = System.getenv("HUAWEI_MAVEN_USER") ?: localProps.getProperty("huaweiMavenUser")
     val huaweiPass = System.getenv("HUAWEI_MAVEN_PASS") ?: localProps.getProperty("huaweiMavenPass")
-    val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
-    val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
     repositories {
-        // colab: 发布 org.cpf.kotlin klib 的仓库(凭据在 local.properties)
-        maven {
-            url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
-            if (colabUser != null && colabPass != null) {
-                credentials { username = colabUser; password = colabPass }
-                authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
-            }
+        exclusiveContent {
+            forRepository { maven { url = uri(rootDir.parentFile.resolve("m2")) } }
+            filter { includeGroup("org.cpf.kotlin") }
         }
-        // 本地 m2:测试期走本地 m2(producer 发布的待测版本);发布期改回 colab 远程仓。
-        // 开发流程:有变更测试时先走本地 m2,发布完新版本后再走 colab(见根 agent.md)。
-        // 当前 22-0.2 已发 colab,走 colab 远程仓验证(本地 m2 注释)。
-        // maven { url = uri(rootDir.parentFile.resolve("m2")) }
+
+
         maven {
             url = uri("https://devrepo.devcloud.cn-north-4.huaweicloud.com/artgalaxy/cn-north-4_a8338babc8534bb8aabb062c35845155_maven_7_1/")
+            content { includeVersionByRegex(".*", ".*", ".*HUAWEI.*") }
             if (huaweiUser != null && huaweiPass != null) {
                 credentials { username = huaweiUser; password = huaweiPass }
                 authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }

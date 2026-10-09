@@ -1,6 +1,7 @@
 package = platform.CStandardLibrary.MuslMalloc
 headers = malloc.h
 headerFilter = malloc.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lc -Wl,--pop-state
+linkerOpts = -lc
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

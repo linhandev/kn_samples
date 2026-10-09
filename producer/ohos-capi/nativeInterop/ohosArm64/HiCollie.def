@@ -1,6 +1,7 @@
 package = platform.PerformanceAnalysisKit.HiCollie
 headers = hicollie/hicollie.h
 headerFilter = hicollie/hicollie.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohhicollie -Wl,--pop-state
+linkerOpts = -lohhicollie
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

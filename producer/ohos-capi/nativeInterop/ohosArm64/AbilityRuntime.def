@@ -2,6 +2,7 @@ package = platform.AbilityKit.AbilityRuntime
 headers = AbilityKit/ability_runtime/ability_runtime_common.h AbilityKit/ability_runtime/context_constant.h AbilityKit/ability_runtime/start_options.h AbilityKit/ability_runtime/application_context.h
 headerFilter = AbilityKit/ability_runtime/**
 depends = AbilityBase Image_NativeModule
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lability_runtime -Wl,--pop-state
+linkerOpts = -lability_runtime
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

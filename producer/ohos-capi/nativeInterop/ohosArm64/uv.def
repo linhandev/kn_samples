@@ -1,4 +1,4 @@
 depends = posix
 package = platform.uv
 headers = uv.h
-depends = linux
+depends = posix

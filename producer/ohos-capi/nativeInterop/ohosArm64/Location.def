@@ -1,6 +1,7 @@
 package = platform.LocationKit.Location
 headers = LocationKit/oh_location.h LocationKit/oh_location_type.h
 headerFilter = LocationKit/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -llocation_ndk -Wl,--pop-state
+linkerOpts = -llocation_ndk
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

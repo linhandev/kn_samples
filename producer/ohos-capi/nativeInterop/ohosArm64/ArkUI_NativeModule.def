@@ -2,6 +2,7 @@ package = platform.ArkUI.ArkUI_NativeModule
 headers = arkui/native_dialog.h arkui/drag_and_drop.h arkui/native_node.h arkui/native_animate.h arkui/native_type.h arkui/native_key_event.h arkui/native_interface_focus.h arkui/styled_string.h arkui/native_node_napi.h arkui/native_gesture.h arkui/native_interface.h arkui/drawable_descriptor.h arkui/ui_input_event.h
 headerFilter = arkui/**
 depends = ArkTS_Napi_NativeModule Drawing Image_NativeModule UDMF
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lace_ndk.z -Wl,--pop-state
+linkerOpts = -lace_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

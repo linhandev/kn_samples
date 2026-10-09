@@ -1,6 +1,7 @@
 package = platform.SensorServiceKit.Vibrator
 headers = sensors/vibrator.h sensors/vibrator_type.h
 headerFilter = sensors/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohvibrator.z -Wl,--pop-state
+linkerOpts = -lohvibrator.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

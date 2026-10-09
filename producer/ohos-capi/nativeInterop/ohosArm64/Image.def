@@ -2,6 +2,7 @@ package = platform.ImageKit.Image
 headers = multimedia/image_framework/image_source_mdk.h multimedia/image_framework/image_mdk.h multimedia/image_framework/image_receiver_mdk.h multimedia/image_framework/image_pixel_map_mdk.h multimedia/image_framework/image_mdk_common.h multimedia/image_framework/image_packer_mdk.h
 headerFilter = multimedia/image_framework/**
 depends = ArkTS_Napi_NativeModule RawFile
-linkerOpts = -Wl,--push-state -Wl,--as-needed -limage_ndk.z -limage_packer_ndk.z -limage_receiver_ndk.z -limage_source_ndk.z -lpixelmap_ndk.z -Wl,--pop-state
+linkerOpts = -limage_ndk.z -limage_packer_ndk.z -limage_receiver_ndk.z -limage_source_ndk.z -lpixelmap_ndk.z
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

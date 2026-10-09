@@ -2,6 +2,7 @@ package = platform.MediaLibraryKit.MediaAssetManager
 headers = multimedia/media_library/media_asset_base_capi.h multimedia/media_library/media_access_helper_capi.h multimedia/media_library/moving_photo_capi.h multimedia/media_library/media_asset_manager_capi.h multimedia/media_library/media_asset_change_request_capi.h multimedia/media_library/media_asset_capi.h
 headerFilter = multimedia/media_library/**
 depends = Image_NativeModule
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lmedia_asset_manager -Wl,--pop-state
+linkerOpts = -lmedia_asset_manager
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

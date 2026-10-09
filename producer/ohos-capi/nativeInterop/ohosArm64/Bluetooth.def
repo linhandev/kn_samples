@@ -1,6 +1,7 @@
 package = platform.ConnectivityKit.Bluetooth
 headers = ConnectivityKit/bluetooth/oh_bluetooth.h
 headerFilter = ConnectivityKit/bluetooth/oh_bluetooth.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lbluetooth_ndk -Wl,--pop-state
+linkerOpts = -lbluetooth_ndk
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

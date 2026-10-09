@@ -1,7 +1,8 @@
 package = platform.DeviceSecurityKit.SecurityAudit
 headers = DeviceSecurityKit/security_audit.h
 headerFilter = DeviceSecurityKit/security_audit.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lsecurityaudit_ndk.z -Wl,--pop-state
+linkerOpts = -lsecurityaudit_ndk.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

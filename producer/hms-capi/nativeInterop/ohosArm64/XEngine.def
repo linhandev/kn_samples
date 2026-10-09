@@ -15,8 +15,9 @@ headers = xengine/xeg_extension_defs.h \
     xengine/xeg_gles_temporal_upscale.h \
     xengine/xeg_gles_adaptive_vrs.h
 headerFilter = xengine/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lxengine -Wl,--pop-state
+linkerOpts = -lxengine
 language = C++
 compilerOpts = -std=c++17
 depends = vulkan gles3
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

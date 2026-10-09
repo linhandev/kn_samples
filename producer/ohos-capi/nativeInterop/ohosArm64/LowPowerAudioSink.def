@@ -2,6 +2,7 @@ package = platform.MediaKit.LowPowerAudioSink
 headers = multimedia/player_framework/lowpower_audio_sink_base.h multimedia/player_framework/lowpower_audio_sink.h
 headerFilter = multimedia/player_framework/**
 depends = AVSinkBase Core OHAudio
-linkerOpts = -Wl,--push-state -Wl,--as-needed -llowpower_avsink -Wl,--pop-state
+linkerOpts = -llowpower_avsink
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

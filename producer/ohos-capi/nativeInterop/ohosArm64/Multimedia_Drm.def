@@ -2,6 +2,7 @@ package = platform.AVCodecKit.Multimedia_Drm
 headers = multimedia/player_framework/native_cencinfo.h
 headerFilter = multimedia/player_framework/native_cencinfo.h
 depends = Core
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_media_avcencinfo -Wl,--pop-state
+linkerOpts = -lnative_media_avcencinfo
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

@@ -1,6 +1,7 @@
 package = platform.AbilityKit.AbilityAccessControl
 headers = accesstoken/ability_access_control.h
 headerFilter = accesstoken/ability_access_control.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lability_access_control -Wl,--pop-state
+linkerOpts = -lability_access_control
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

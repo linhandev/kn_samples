@@ -1,6 +1,7 @@
 package = platform.PerformanceAnalysisKit.HiDebug
 headers = hidebug/hidebug_type.h hidebug/hidebug.h
 headerFilter = hidebug/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohhidebug -Wl,--pop-state
+linkerOpts = -lohhidebug
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

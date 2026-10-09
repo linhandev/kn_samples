@@ -107,6 +107,7 @@ class ModuleTestRunner:
     """逐模块测试运行器"""
     
     def __init__(self):
+        self.device = os.environ["HDC_DEVICE"]
         self.test_cases: List[TestCase] = []
         self.test_results: Dict[str, Dict] = {}
         self.ui_results: Dict[str, Dict[str, str]] = {}  # {module: {func: result}}
@@ -116,7 +117,7 @@ class ModuleTestRunner:
         """执行hdc命令"""
         try:
             return subprocess.run(
-                ["hdc"] + args,
+                ["hdc", "-t", self.device] + args,
                 capture_output=True,
                 text=True,
                 encoding="utf-8",

@@ -1,7 +1,8 @@
 package = platform.PenKit.HandWrite
 headers = handwrite/native_handwrite_api.h
 headerFilter = handwrite/native_handwrite_api.h
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lhandwrite_ndk.z -Wl,--pop-state
+linkerOpts = -lhandwrite_ndk.z
 language = C++
 compilerOpts = -std=c++17
 #harmonyOS SDK Only
+enableUndefinedApiProtection = true

@@ -24,6 +24,7 @@ kotlin {
     }
 
     ohosArm64 {
+        compilerOptions.freeCompilerArgs.add("-Xklib-duplicated-unique-name-strategy=allow-all-with-warning")
         // HiLog and all other ohos platform bindings now come from the cpf 0.4-built klib
         // published to maven local (com.example:ohos-capi:22-0.1-SNAPSHOT, package
         // platform.PerformanceAnalysisKit.HiLog etc.) — no local cinterop here.
@@ -35,11 +36,9 @@ kotlin {
             // Set SONAME so the NAPI libentry.so's NEEDED records bare "libkn.so" (not a host
             // absolute path), letting the device dlopen it from the app's libs dir.
             freeCompilerArgs += "-linker-options=-Wl,-soname,libkn.so"
-            // --as-needed: only record NEEDED for libs whose symbols are actually referenced.
-            // The klib's linkerOpts cover all 159 defs incl. HMS Kits (securityantivirus/aip/...)
-            // whose .so stubs exist in the HMS sysroot for link but NOT on the device. Without
-            // --as-needed, libkn.so would NEEDED all of them and dlopen fails at load time.
-            freeCompilerArgs += "-linker-options=-Wl,--as-needed"
+            // weak API 防护需要保留被使用库的 -l；在 KN 层裁剪未使用的 KLIB。
+            freeCompilerArgs += "-Xpurge-user-libs"
+
         }
         compilations.all {
             compileTaskProvider.configure {

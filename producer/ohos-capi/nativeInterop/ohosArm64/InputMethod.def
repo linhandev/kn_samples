@@ -1,6 +1,7 @@
 package = platform.IMEKit.InputMethod
 headers = inputmethod/inputmethod_text_avoid_info_capi.h inputmethod/inputmethod_text_editor_proxy_capi.h inputmethod/inputmethod_attach_options_capi.h inputmethod/inputmethod_cursor_info_capi.h inputmethod/inputmethod_types_capi.h inputmethod/inputmethod_text_config_capi.h inputmethod/inputmethod_private_command_capi.h inputmethod/inputmethod_inputmethod_proxy_capi.h inputmethod/inputmethod_controller_capi.h
 headerFilter = inputmethod/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lohinputmethod -Wl,--pop-state
+linkerOpts = -lohinputmethod
 language = C++
 compilerOpts = -std=c++17
+enableUndefinedApiProtection = true

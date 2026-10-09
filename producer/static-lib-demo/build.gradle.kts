@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     kotlin("multiplatform")
     `maven-publish`
@@ -24,14 +22,7 @@ kotlin {
             }
         }
     }
-    sourceSets {
-        val ohosArm64Main by getting {
-            dependencies {
-                // depends on ohos-capi so the demo consumer can pull both via one coordinate
-                implementation("org.cpf.kotlin:ohos-capi:${property("klibVersion")}")
-            }
-        }
-    }
+
 }
 
 publishing {
@@ -41,24 +32,13 @@ publishing {
         }
     }
     // Publish to the repo-local Maven repo (kn_sample/m2, gitignored) instead of ~/.m2.
-    // Use `./gradlew :static-lib-demo:publish`. 同时发布到 colab 远程仓库(凭据在 local.properties)。
+    // Use `./gradlew :static-lib-demo:publish`. 仅发布到本地仓库。
     repositories {
-        maven { url = uri(rootProject.projectDir.parentFile.resolve("m2")) }
-        val localProps = Properties().apply {
-            runCatching { rootProject.file("local.properties").inputStream() }.getOrNull()?.let { load(it) }
-        }
-        val colabUser = System.getenv("COLAB_MAVEN_USER") ?: localProps.getProperty("colabMavenUser")
-        val colabPass = System.getenv("COLAB_MAVEN_PASS") ?: localProps.getProperty("colabMavenPass")
-        if (!colabUser.isNullOrEmpty() && !colabPass.isNullOrEmpty()) {
-            maven {
-                name = "colab"
-                url = uri("https://packages.aliyun.com/687e79a0e94e043d2d0f76ea/maven/colab")
-                credentials { username = colabUser; password = colabPass }
-                authentication { create("basic", org.gradle.authentication.http.BasicAuthentication::class.java) }
-            }
-        }
+        maven { name = "m2"; url = uri(rootProject.projectDir.parentFile.resolve("m2")) }
     }
 }
 
-// colab 不允许同路径覆盖(409),只发 target publication,跳过 metadata(见 ohos-capi 同款注释)。
-tasks.matching { it.name == "publishKotlinMultiplatformPublicationToColabRepository" }.configureEach { enabled = false }
+// 单目标测试包只发布 Native publication，避免 KMP 根 publication 覆盖同一坐标。
+tasks.withType<org.gradle.api.publish.maven.tasks.PublishToMavenRepository>().configureEach {
+    if (publication.name == "kotlinMultiplatform") enabled = false
+}

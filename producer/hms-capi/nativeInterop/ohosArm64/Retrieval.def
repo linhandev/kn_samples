@@ -6,8 +6,8 @@ headers = dataaugmentation/retrieval/aip_retrieval.h \
     dataaugmentation/retrieval/aip_retrieval_query.h \
     dataaugmentation/retrieval/aip_retrieval_record.h
 headerFilter = dataaugmentation/retrieval/**
-linkerOpts = -Wl,--push-state -Wl,--as-needed -lnative_aip_retrieval_ndk.z -Wl,--pop-state
+linkerOpts = -lnative_aip_retrieval_ndk.z
 language = C++
 compilerOpts = -std=c++17
-#harmonyOS SDK Only 
-
+#harmonyOS SDK Only
+enableUndefinedApiProtection = true
